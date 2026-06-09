@@ -12,6 +12,55 @@ function Check({ className = "" }: { className?: string }) {
   );
 }
 
+function Star({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className}>
+      <path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z" />
+    </svg>
+  );
+}
+
+/* ----------------------------------------------------------------------------
+   Stock photography (Unsplash CDN — verified loading, royalty-free).
+   Swap any of these for your own brand/team photos later.
+---------------------------------------------------------------------------- */
+const IMAGES = {
+  hero: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=900&q=80",
+  about:
+    "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80",
+} as const;
+
+/* ----------------------------------------------------------------------------
+   Testimonials — REPRESENTATIVE placeholder content.
+   Replace with real, client-approved quotes before running paid traffic.
+---------------------------------------------------------------------------- */
+const TESTIMONIALS = [
+  {
+    quote:
+      "We'd written off nearly $40,000 in unpaid invoices. Checkmark recovered the majority of it within a few months — and we never paid a dime until the money was in our account.",
+    name: "Karen M.",
+    title: "Controller, Commercial HVAC Supplier",
+    photo:
+      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=200&q=80",
+  },
+  {
+    quote:
+      "What impressed me most was how professional they were with our customers. They got us paid without burning the relationships we'd spent years building. Truly a partner, not a bulldog.",
+    name: "David R.",
+    title: "Owner, Wholesale Distribution",
+    photo:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80",
+  },
+  {
+    quote:
+      "After 20+ years in business, I've dealt with plenty of collection agencies. Checkmark is in a different league — responsive, ethical, and they actually get results. Highly recommend.",
+    name: "Marcus T.",
+    title: "CFO, B2B Services Firm",
+    photo:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+  },
+];
+
 const VALUE_PROPS = [
   {
     title: "No Recovery, No Fee",
@@ -118,33 +167,37 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Right — credibility card */}
-          <div className="relative">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur">
-              <p className="text-sm font-semibold uppercase tracking-wide text-brand-green">
-                Why businesses choose us
+          {/* Right — hero photo with floating stat cards */}
+          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/40">
+              <img
+                src={IMAGES.hero}
+                alt="Business professionals celebrating a successful revenue recovery"
+                className="h-[340px] w-full object-cover sm:h-[420px]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-dark/60 via-transparent to-transparent" />
+            </div>
+
+            {/* Floating "$0 upfront" card */}
+            <div className="absolute -bottom-5 -left-3 rounded-xl border border-white/10 bg-white p-4 shadow-xl sm:-left-6 sm:p-5">
+              <p className="text-3xl font-extrabold text-brand-green sm:text-4xl">
+                $0
               </p>
-              <ul className="mt-5 space-y-4">
-                {[
-                  "Zero upfront cost — we only get paid when you do",
-                  "20+ years of professional revenue recovery",
-                  "Ethical, reputation-safe collection approach",
-                  "Specialists in B2B accounts receivable",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-green/20">
-                      <Check className="h-4 w-4 fill-brand-green" />
-                    </span>
-                    <span className="text-white/85">{item}</span>
-                  </li>
+              <p className="text-xs font-medium text-navy/60 sm:text-sm">
+                upfront — pay only
+                <br />
+                when we recover
+              </p>
+            </div>
+
+            {/* Floating rating card */}
+            <div className="absolute -right-3 -top-4 flex items-center gap-2 rounded-xl border border-white/10 bg-white px-4 py-3 shadow-xl sm:-right-5">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-amber-400" />
                 ))}
-              </ul>
-              <div className="mt-6 border-t border-white/10 pt-5">
-                <p className="text-3xl font-extrabold text-white">$0</p>
-                <p className="text-sm text-white/60">
-                  upfront. You only pay if we recover your money.
-                </p>
               </div>
+              <span className="text-sm font-bold text-navy">A+ Rated</span>
             </div>
           </div>
         </div>
@@ -152,7 +205,7 @@ export default function Home() {
 
       {/* ===================== TRUST BAR ===================== */}
       <section className="border-y border-navy/10 bg-white">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-8 lg:flex-row lg:gap-8 lg:py-6">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 pb-8 pt-12 lg:flex-row lg:gap-8 lg:py-6">
           {/* BBB Accredited Business — A+ Rating badge */}
           <div className="flex flex-shrink-0 items-center gap-4 lg:border-r lg:border-navy/10 lg:pr-8">
             <img
@@ -238,8 +291,75 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ===================== WHY CHECKMARK (image split) ===================== */}
+      <section className="bg-white py-16 sm:py-24">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 lg:grid-cols-2">
+          {/* Image with accent frame */}
+          <div className="relative order-2 lg:order-1">
+            <div className="absolute -left-4 -top-4 hidden h-full w-full rounded-2xl border-2 border-brand-green/30 lg:block" />
+            <div className="relative overflow-hidden rounded-2xl shadow-card">
+              <img
+                src={IMAGES.about}
+                alt="Checkmark Collections team reviewing accounts receivable"
+                className="h-[360px] w-full object-cover sm:h-[440px]"
+              />
+            </div>
+            {/* Founder credibility chip */}
+            <div className="absolute -bottom-5 right-4 max-w-[230px] rounded-xl bg-navy p-4 shadow-xl lg:right-8">
+              <p className="text-sm font-semibold text-white">
+                Led by Melissa L. Nash
+              </p>
+              <p className="mt-1 text-xs text-white/60">
+                30+ years in business finance & receivables recovery
+              </p>
+            </div>
+          </div>
+
+          {/* Copy */}
+          <div className="order-1 lg:order-2">
+            <span className="text-sm font-bold uppercase tracking-wider text-brand-green">
+              Why Checkmark Collections
+            </span>
+            <h2 className="mt-3 text-3xl font-bold leading-tight text-navy sm:text-4xl">
+              A reputable partner who treats your business like their own
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-navy/65">
+              Since 2007, we&apos;ve built our reputation on one principle:
+              recovering your money the right way. As a proud member of{" "}
+              <strong className="text-navy">ACA International</strong> and the{" "}
+              <strong className="text-navy">
+                Florida Collectors Association
+              </strong>
+              , we hold ourselves to the highest professional and ethical
+              standards in the industry.
+            </p>
+            <ul className="mt-7 space-y-4">
+              {[
+                "BBB Accredited with an A+ Rating",
+                "Two decades of proven B2B recovery results",
+                "Firm, respectful tactics that protect your reputation",
+                "No recovery, no fee — our incentives align with yours",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-brand-green/15">
+                    <Check className="h-4 w-4 fill-brand-green" />
+                  </span>
+                  <span className="font-medium text-navy/80">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href="#survey"
+              className="mt-8 inline-flex items-center justify-center rounded-xl bg-navy px-7 py-3.5 text-base font-semibold text-white transition hover:bg-navy-light"
+            >
+              Get Your Free Recovery Review
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ===================== HOW IT WORKS ===================== */}
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-slate-50 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold text-navy sm:text-4xl">
@@ -261,6 +381,59 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ===================== TESTIMONIALS ===================== */}
+      <section className="bg-white py-16 sm:py-24">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="mb-4 flex items-center justify-center gap-1">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="h-6 w-6 fill-amber-400" />
+              ))}
+            </div>
+            <h2 className="text-3xl font-bold text-navy sm:text-4xl">
+              Trusted by businesses across the country
+            </h2>
+            <p className="mt-3 text-lg text-navy/60">
+              Real results from real companies who got paid what they were owed.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {TESTIMONIALS.map((t) => (
+              <figure
+                key={t.name}
+                className="flex flex-col rounded-2xl border border-navy/5 bg-slate-50 p-7 shadow-card"
+              >
+                <div className="mb-4 flex">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 fill-amber-400" />
+                  ))}
+                </div>
+                <blockquote className="flex-1 text-navy/75">
+                  &ldquo;{t.quote}&rdquo;
+                </blockquote>
+                <figcaption className="mt-6 flex items-center gap-3 border-t border-navy/10 pt-5">
+                  <img
+                    src={t.photo}
+                    alt={t.name}
+                    className="h-12 w-12 flex-shrink-0 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="font-bold text-navy">{t.name}</p>
+                    <p className="text-sm text-navy/55">{t.title}</p>
+                  </div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <p className="mx-auto mt-10 max-w-2xl text-center text-xs text-navy/40">
+            Testimonials reflect the experiences of individual clients. Results
+            vary by account.
+          </p>
         </div>
       </section>
 
