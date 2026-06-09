@@ -55,14 +55,11 @@ export default function Home() {
       {/* ===================== TOP BAR ===================== */}
       <header className="sticky top-0 z-40 border-b border-white/10 bg-navy/95 backdrop-blur supports-[backdrop-filter]:bg-navy/80">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5">
-          <div className="flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-md bg-brand-green">
-              <Check className="h-5 w-5 fill-white" />
-            </span>
-            <span className="text-lg font-bold tracking-tight text-white">
-              Checkmark Collections
-            </span>
-          </div>
+          <img
+            src="/assets/logo-white.png"
+            alt="Checkmark Collections"
+            className="h-9 w-auto sm:h-10"
+          />
           <a
             href={CONFIG.PHONE_HREF}
             className="hidden items-center gap-2 text-sm font-semibold text-white sm:flex"
@@ -155,20 +152,35 @@ export default function Home() {
 
       {/* ===================== TRUST BAR ===================== */}
       <section className="border-y border-navy/10 bg-white">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px overflow-hidden px-4 py-2 md:grid-cols-4">
-          {[
-            { stat: "20+", label: "Years in business" },
-            { stat: "2007", label: "Established" },
-            { stat: "ACA", label: "International Member" },
-            { stat: "FCA", label: "Florida Collectors Assn." },
-          ].map((t) => (
-            <div key={t.label} className="px-4 py-6 text-center">
-              <p className="text-2xl font-extrabold text-brand-blue sm:text-3xl">
-                {t.stat}
-              </p>
-              <p className="mt-1 text-sm font-medium text-navy/55">{t.label}</p>
-            </div>
-          ))}
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-8 lg:flex-row lg:gap-8 lg:py-6">
+          {/* BBB Accredited Business — A+ Rating badge */}
+          <div className="flex flex-shrink-0 items-center gap-4 lg:border-r lg:border-navy/10 lg:pr-8">
+            <img
+              src="/assets/bbb.jpg"
+              alt="BBB Accredited Business — A+ Rating"
+              width={150}
+              height={54}
+              className="h-auto w-[150px]"
+            />
+          </div>
+
+          <div className="grid w-full grid-cols-2 gap-px md:grid-cols-4">
+            {[
+              { stat: "20+", label: "Years in business" },
+              { stat: "2007", label: "Established" },
+              { stat: "ACA", label: "International Member" },
+              { stat: "FCA", label: "Florida Collectors Assn." },
+            ].map((t) => (
+              <div key={t.label} className="px-4 py-2 text-center">
+                <p className="text-2xl font-extrabold text-brand-blue sm:text-3xl">
+                  {t.stat}
+                </p>
+                <p className="mt-1 text-sm font-medium text-navy/55">
+                  {t.label}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -278,15 +290,12 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-4 py-12">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             <div className="lg:col-span-1">
-              <div className="flex items-center gap-2">
-                <span className="flex h-8 w-8 items-center justify-center rounded-md bg-brand-green">
-                  <Check className="h-5 w-5 fill-white" />
-                </span>
-                <span className="text-lg font-bold text-white">
-                  Checkmark Collections
-                </span>
-              </div>
-              <p className="mt-3 text-sm">
+              <img
+                src="/assets/logo-white.png"
+                alt="Checkmark Collections"
+                className="h-11 w-auto"
+              />
+              <p className="mt-4 text-sm">
                 We put the &ldquo;check&rdquo; into your business.
               </p>
               <p className="mt-2 text-sm font-semibold text-brand-green">
